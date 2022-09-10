@@ -16,12 +16,17 @@ export const ProductCard = ({product}) => {
     <div className={`productCard ${productHasBackImage && "productCardDouble"}`}>
       <div className={`productCard__container`}>
       <div className={`productCard__container__image`}>
-          <img loading="lazy" src={product.image.front.src} alt={`${product.image.front.title}`} name={`${product.image.front.title}`}/>
+          <img loading="lazy" className='primary__image' src={product.image.front.src} alt={`${product.image.front.title}`} name={`${product.image.front.title}`}/>
           {
               productHasBackImage &&
               <>
-                  <img className="hide" loading="lazy" src={product.image.back.src} alt={`${product.image.back.title}`} name={`${product.image.back.title}`}/>
-                  <span className="viewMore">Ver más</span>
+                  <img className="secondary__image" loading="lazy" src={product.image.back.src} alt={`${product.image.back.title}`} name={`${product.image.back.title}`}/>
+                  <button className="viewMore" onClick={(e)=>{
+                    if (e.target.closest('.productCard__container__image')) {
+                      console.log(e.target.closest('.productCard__container__image'));
+                      e.target.closest('.productCard__container__image').classList.toggle('turn')
+                    }
+                  }}>Ver más</button>
               </>
           }
           {

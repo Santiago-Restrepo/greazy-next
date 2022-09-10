@@ -46,6 +46,24 @@ const productsFetched = [
         },
         new: true
     },
+    {
+        name: "RAINBOW",
+        price: {
+            old: "",
+            current: 65000
+        },
+        image: {
+            front: {
+                title: "",
+                src: "https://www.greazy.shop/cd7e4460b8774b968dcf.jpg"
+            },
+            back: {
+                title: "",
+                src: "https://www.greazy.shop/c55d721513c9ef80eac3.jpg"
+            }
+        },
+        new: true
+    },
 ]
 
 //Components
@@ -66,7 +84,7 @@ export const Catalog = () => {
         <h2>Toca lo que te guste y pídelo</h2>
         <Swiper
             // install Swiper modules
-            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            modules={[Navigation, Pagination, Scrollbar]}
             // breakpoints}
             loop={true}
             spaceBetween={10}

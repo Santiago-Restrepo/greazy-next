@@ -138,8 +138,29 @@ marquee {
 .productCard__container__image{
     position: relative;
     cursor: pointer;
+    transition: transform .5s ease;
 }
 
+.productCard__container__image.turn, 
+.productCard__container__image.turn .viewMore,
+.productCard__container__image.turn .newCollection,
+.productCard__container__image.turn .contacto{
+    transform: rotateY(180deg);
+}
+.productCard__container__image.turn .viewMore{
+    transform: rotateY(180deg);
+    
+}
+.productCard__container__image.turn .secondary__image{
+    display: initial;
+}
+.productCard__container__image.turn .primary__image{
+    display: none;
+
+}
+.productCard__container__image .secondary__image{
+    display: none;
+}
 .productCard img{
     width: 100%;
 }
@@ -154,9 +175,11 @@ marquee {
     padding: .5rem 0;
     background-color: rgba(10,9,9,.5);
     opacity: 0;
-    transition: opacity .5s ease;
+    transition: .5s ease;
+    transition-property: opacity, transform
 }
 .viewMore{
+    z-index: 1;
     position: absolute;
     display: block;
     top: 0;
@@ -169,8 +192,15 @@ marquee {
     font-weight: 500;
     font-size: 1.2em;
     font-family: "Oswald","sans-serif";
-    transition: .5s ease;
+    transition: .3s ease;
+    transition-property: transform, background-color;
+    border: transparent;
     cursor: pointer;
+}
+.viewMore:hover{
+    background-color: rgb(255, 255, 255);
+    color: black;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.684);
 }
 .productCard__container__image:hover .contacto{
     opacity: 1;
@@ -178,17 +208,7 @@ marquee {
 .swiper-wrapper{
     align-items: flex-end;
 }
-.swiper-slide .productCard{
-    opacity: .5;
-    transition: opacity .5 ease;
-}
-.swiper-slide-next .productCard{
-    transition: opacity .5 ease;
-    opacity: 1;
-}
-.productCard__container__image .hide{
-    display: none;
-}
+
 .swiper-button-next, .swiper-button-prev{
     color: white !important;
     background-color: rgba(0, 0, 0, 0.657);
@@ -596,7 +616,14 @@ section.gallery img {
   .swiper {
     max-width: 70em;
   }
-  
+  .swiper-slide .productCard{
+    opacity: .5;
+    transition: opacity 1s ease;
+}
+.swiper-slide-next .productCard{
+    transition: opacity 1s ease;
+    opacity: 1;
+}
   .about__greazy {
     display: -webkit-box;
     display: -ms-flexbox;

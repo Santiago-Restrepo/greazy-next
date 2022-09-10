@@ -7,18 +7,18 @@ import {FaFacebookF} from 'react-icons/fa'
 const numberFormat = new Intl.NumberFormat('co-CO', { style: 'currency', currency: 'COP' });
 
 export const ProductCard = ({product}) => {
-  const productType = product.image.back.src ? "productDouble": "product";
+  const productHasBackImage = product.image.back.src ? true: false;
   let discount = null;
   if (product.price.old) {
     discount = Math.round((1 - (product.price. current / product.price.old)) * 100);
   }
   return (
-    <div className={`${productType} old`}>
-      <div className={`${productType}__container`}>
-      <div className={`${productType}__container__image`}>
+    <div className={`productCard ${productHasBackImage && "productCardDouble"}`}>
+      <div className={`productCard__container`}>
+      <div className={`productCard__container__image`}>
           <img loading="lazy" src={product.image.front.src} alt={`${product.image.front.title}`} name={`${product.image.front.title}`}/>
           {
-              productType === "productDouble" &&
+              productHasBackImage &&
               <>
                   <img className="hide" loading="lazy" src={product.image.back.src} alt={`${product.image.back.title}`} name={`${product.image.back.title}`}/>
                   <span className="viewMore">Ver más</span>
@@ -31,7 +31,7 @@ export const ProductCard = ({product}) => {
           }
           {
               product.new &&
-              <span className="newCollection rainbow-button" alt="Etiqueta de producto nuevo"></span>
+              <span className="newCollection rainbow-button" alt="Nueva colección"></span>
           }
       <div className="contacto">
           <a href="https://www.instagram.com/__greazy__/?hl=es-la" target="_blank" rel="noopener" alt="Enlace a instagram" name="Enlace a instagram">
@@ -45,8 +45,8 @@ export const ProductCard = ({product}) => {
           </a>
       </div>
       </div>
-          <span className={`${productType}__container__name`}>{product.name}</span>
-          <span className={`${productType}__container__price`}>{String(numberFormat.format(product.price.current)).replace(',00', "")}</span>
+          <span className={`productCard__container__name`}>{product.name}</span>
+          <span className={`productCard__container__price`}>{String(numberFormat.format(product.price.current)).replace(',00', "")}</span>
       </div>
   </div>
   )

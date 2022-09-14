@@ -173,7 +173,7 @@ marquee {
     justify-content: space-around;
     align-items: center;
     padding: .5rem 0;
-    background-color: rgba(10,9,9,.5);
+    background-color: rgba(10, 9, 9, 0.733);
     opacity: 0;
     transition: .5s ease;
     transition-property: opacity, transform
@@ -205,6 +205,7 @@ marquee {
 .productCard__container__image:hover .contacto{
     opacity: 1;
 }
+
 .swiper-wrapper{
     align-items: flex-end;
 }
@@ -428,7 +429,6 @@ section.gallery img {
 .contact .contact__box {
   text-align: center;
   width: 100%;
-  padding: 15px 0px;
   color: #ffffff;
 }
 .contact .contact__box h2 {
@@ -453,7 +453,7 @@ section.gallery img {
   font-size: 40px;
   color: white;
 }
-.contact .contact__box__redes a i {
+.contact .contact__box__redes a {
   margin: 10px;
   font-size: 30px;
   color: white;
@@ -608,6 +608,7 @@ section.gallery img {
     background-position-y: -230px;
     background-attachment: fixed;
   }
+  
 
   .catalog h2 {
     margin-bottom: 2em;
@@ -623,6 +624,13 @@ section.gallery img {
 .swiper-slide-next .productCard{
     transition: opacity 1s ease;
     opacity: 1;
+}
+.contacto a{
+  opacity: .5;
+  transition: opacity .5s ease;
+}
+.contacto a:hover{
+  opacity: 1;
 }
   .about__greazy {
     display: -webkit-box;

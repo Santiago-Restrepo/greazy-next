@@ -69,13 +69,58 @@ const productsFetched = [
 //Components
 import { ProductCard } from './ProductCard'
 
+const query = `
+query{
+    productCollection(limit: 10){
+        items{
+            name,
+            oldPrice,
+            currentPrice,
+            frontImage{
+                title,
+                url
+            }
+            backImage{
+                title,
+                url
+            },
+            new
+        }
+    }
+}
+`
+
 export const Catalog = () => {
     const [products, setProducts] = useState(null);
-    useEffect(()=>{
-        setTimeout(()=>{
-            setProducts(productsFetched)
-        },1000)
-    }, [])
+    // useEffect(()=>{
+    //     setTimeout(()=>{
+    //         setProducts(productsFetched)
+    //     },1000)
+    // }, [])
+
+    useEffect(() => {
+        window
+        .fetch(`https://graphql.contentful.com/content/v1/spaces/oog003kr6f0q`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            // Authenticate the request
+            Authorization: "Bearer VI6PUF7aGdSthBhukcD-t1-XcDCdm0YF-Hgp5Yi1T_U",
+        },
+        // send the GraphQL query
+        body: JSON.stringify({ query }),
+        })
+        .then((response) => response.json())
+        .then(({ data, errors }) => {
+        if (errors) {
+            console.error(errors);
+        }
+        console.log(data);
+        // rerender the entire component with new data
+        setProducts(data.productCollection.items)
+        // setPage(data.pageCollection.items[0]);
+        });
+    }, []);
 
   return (
     <section className="catalog">

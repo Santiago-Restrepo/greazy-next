@@ -6,38 +6,50 @@ import { Hero } from '../components/Hero'
 import { Catalog } from '../components/Catalog'
 import { Gallery } from '../components/Gallery'
 
-const galleryFetched = [
-  {
-    title:"Ropa urbana en medellín",
-    src: "https://www.greazy.shop/8842c4f85d8a5fd312aa.jpg",
-    featured: true
-  },
-  {
-    title:"Ropa urbana en medellín",
-    src: "https://www.greazy.shop/95266502196f581360b0.jpg",
-    featured: false
-  },
-  {
-    title:"Ropa urbana en medellín",
-    src: "https://www.greazy.shop/8842c4f85d8a5fd312aa.jpg",
-    featured: false
-  },
-  {
-    title:"Ropa urbana en medellín",
-    src: "https://www.greazy.shop/80bfd0d67142df909c87.jpg",
-    featured: false
+//Icons
+import {BsInstagram, BsWhatsapp} from 'react-icons/bs'
+import {FaFacebookF} from 'react-icons/fa'
+
+
+const query = `
+  query{
+    galleryPhotoCollection(limit: 9){
+      items{
+        title,
+        image{
+          url
+        },
+        featured
+      }
+    }
   }
-]
+`
 export default function Home() {
   const [galleryPhotos, setGalleryPhotos] = useState(null)
   const [featuredPhoto, setFeaturedPhoto] = useState(null)
-  useEffect(() => {
-    setTimeout(()=>{
-      setGalleryPhotos(galleryFetched);
-      setFeaturedPhoto(galleryFetched.filter(photo => photo.featured)[0])
-    }, 1000)
-  
-  }, [])
+  useEffect(()=>{
+    window
+        .fetch(`https://graphql.contentful.com/content/v1/spaces/oog003kr6f0q`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            // Authenticate the request
+            Authorization: "Bearer VI6PUF7aGdSthBhukcD-t1-XcDCdm0YF-Hgp5Yi1T_U",
+        },
+        // send the GraphQL query
+        body: JSON.stringify({ query }),
+        })
+        .then((response) => response.json())
+        .then(({ data, errors }) => {
+        if (errors) {
+            console.error(errors);
+        }
+        console.log(data);
+        // rerender the entire component with new data
+        setFeaturedPhoto(data.galleryPhotoCollection.items.filter(item => item.featured)[0])
+        setGalleryPhotos(data.galleryPhotoCollection.items)
+        });
+  },[])
   
   return (
     <div>
@@ -58,10 +70,10 @@ export default function Home() {
         {
           featuredPhoto ?
             <div className="about__greazy-image">
-              <img loading="lazy" src={featuredPhoto.src} alt={featuredPhoto.title} name={featuredPhoto.title}/>
-              <img loading="lazy" src={featuredPhoto.src} alt={featuredPhoto.title} name={featuredPhoto.title}/>
-              <img loading="lazy" src={featuredPhoto.src} alt={featuredPhoto.title} name={featuredPhoto.title}/>
-              <img loading="lazy" src={featuredPhoto.src} alt={featuredPhoto.title} name={featuredPhoto.title}/>
+              <img loading="lazy" src={featuredPhoto.image.url} alt={featuredPhoto.title} name={featuredPhoto.title}/>
+              <img loading="lazy" src={featuredPhoto.image.url} alt={featuredPhoto.title} name={featuredPhoto.title}/>
+              <img loading="lazy" src={featuredPhoto.image.url} alt={featuredPhoto.title} name={featuredPhoto.title}/>
+              <img loading="lazy" src={featuredPhoto.image.url} alt={featuredPhoto.title} name={featuredPhoto.title}/>
             </div>
             :
             <p>loading...</p>
@@ -77,7 +89,17 @@ export default function Home() {
       }
     <section className="contact">
       <div className="contact__box">
-        <div className="contact__box__redes"><a href="https://www.instagram.com/__greazy__/?hl=es-la" target="_blank" rel="noopener" alt="Enlace a instagram" name="Enlace a instagram"><i className="fab fa-instagram"></i></a><a href="https://www.facebook.com/Greazy-streetwear-101671948261008" target="_blank" rel="noopener" alt="Enlace a facebook" name="Enlace a facebook"><i className="fab fa-facebook-f"></i></a><a href="https://api.whatsapp.com/send?phone=573226330880&amp;text=Hola%20vengo%20de%20la%20p%C3%A1gina%20web%20y%20me%20interesaría%20conocer%20m%C3%A1s%20de%20ustedes" target="_blank" rel="noopener" alt="Enlace a Whatsapp" name="Enlace a Whatsapp"><i className="fab fa-whatsapp"></i></a></div>
+        <div className="contact__box__redes">
+          <a href="https://www.instagram.com/__greazy__/?hl=es-la" target="_blank" rel="noopener" alt="Enlace a instagram" name="Enlace a instagram">
+              <BsInstagram size={20} color="white"/>
+          </a>
+          <a href="https://www.facebook.com/Greazy-streetwear-101671948261008" target="_blank" rel="noopener" alt="Enlace a facebook" name="Enlace a facebook">
+              <FaFacebookF size={20} color="white"/>
+          </a>
+          <a href="https://api.whatsapp.com/send?phone=573226330880&amp;text=Hola%20vengo%20de%20la%20p%C3%A1gina%20web%20y%20me%20interesaría%20conocer%20m%C3%A1s%20de%20ustedes" target="_blank" rel="noopener" alt="Enlace a Whatsapp" name="Enlace a Whatsapp">
+              <BsWhatsapp size={20} color="white"/>
+          </a>
+        </div>
       </div>
     </section>
     <footer className="footer"><span className="rights">® 2021 by Greazy</span></footer>

@@ -59,7 +59,7 @@ export const ProductCard = ({product}) => {
         </div>
         </div>
             <span className={`productCard__container__name`}>{product.name}</span>
-            <span className={`productCard__container__price`}>{formatNumber(product.currentPrice)} COP</span>
+            <span className={`productCard__container__price`}>{product.currentPrice} COP</span>
         </div>
     </div>
     )

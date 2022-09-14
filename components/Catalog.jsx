@@ -68,6 +68,7 @@ const productsFetched = [
 
 //Components
 import { ProductCard } from './ProductCard'
+import Image from 'next/image';
 
 const query = `
 query{
@@ -125,7 +126,7 @@ export const Catalog = () => {
   return (
     <section className="catalog">
         <span className="notice">Todos los <b>productos con descuento</b> están sujetos a disponibilidad y hasta agotar existencias </span>
-        <div className="greazyRotate"><img loading="lazy" src="./assets/logoblanco.png" alt="loco de greazy girando" name="loco de greazy girando"/></div>
+        <div className="greazyRotate"><Image loading="lazy" width={140} height={140} src="/assets/logoblanco.png" alt="loco de greazy girando" name="loco de greazy girando"/></div>
         <h2>Toca lo que te guste y pídelo</h2>
         <Swiper
             // install Swiper modules

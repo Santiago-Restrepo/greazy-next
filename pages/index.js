@@ -70,10 +70,22 @@ export default function Home() {
         {
           featuredPhoto ?
             <div className="about__greazy-image">
-              <img loading="lazy" src={featuredPhoto.image.url} alt={featuredPhoto.title} name={featuredPhoto.title}/>
-              <img loading="lazy" src={featuredPhoto.image.url} alt={featuredPhoto.title} name={featuredPhoto.title}/>
-              <img loading="lazy" src={featuredPhoto.image.url} alt={featuredPhoto.title} name={featuredPhoto.title}/>
-              <img loading="lazy" src={featuredPhoto.image.url} alt={featuredPhoto.title} name={featuredPhoto.title}/>
+              <div className="about_greazy-image-container">
+                <Image layout={'fill'} objectFit={'contain'} loading="lazy" src={featuredPhoto.image.url} alt={featuredPhoto.title} name={featuredPhoto.title}/>
+              </div>
+              <div className="about_greazy-image-container">
+                <Image layout={'fill'} objectFit={'contain'} loading="lazy" src={featuredPhoto.image.url} alt={featuredPhoto.title} name={featuredPhoto.title}/>
+              </div>
+              <div className="about_greazy-image-container">
+                <Image layout={'fill'} objectFit={'contain'} loading="lazy" src={featuredPhoto.image.url} alt={featuredPhoto.title} name={featuredPhoto.title}/>
+              </div>
+              <div className="about_greazy-image-container">
+                <Image layout={'fill'} objectFit={'contain'} loading="lazy" src={featuredPhoto.image.url} alt={featuredPhoto.title} name={featuredPhoto.title}/>
+              </div>
+              
+              
+              
+              
             </div>
             :
             <p>loading...</p>
@@ -90,13 +102,13 @@ export default function Home() {
     <section className="contact">
       <div className="contact__box">
         <div className="contact__box__redes">
-          <a href="https://www.instagram.com/__greazy__/?hl=es-la" target="_blank" rel="noopener" alt="Enlace a instagram" name="Enlace a instagram">
+          <a href="https://www.instagram.com/__greazy__/?hl=es-la" target="_blank" rel="noreferrer" alt="Enlace a instagram" name="Enlace a instagram">
               <BsInstagram size={20} color="white"/>
           </a>
-          <a href="https://www.facebook.com/Greazy-streetwear-101671948261008" target="_blank" rel="noopener" alt="Enlace a facebook" name="Enlace a facebook">
+          <a href="https://www.facebook.com/Greazy-streetwear-101671948261008" target="_blank" rel="noreferrer" alt="Enlace a facebook" name="Enlace a facebook">
               <FaFacebookF size={20} color="white"/>
           </a>
-          <a href="https://api.whatsapp.com/send?phone=573226330880&amp;text=Hola%20vengo%20de%20la%20p%C3%A1gina%20web%20y%20me%20interesaría%20conocer%20m%C3%A1s%20de%20ustedes" target="_blank" rel="noopener" alt="Enlace a Whatsapp" name="Enlace a Whatsapp">
+          <a href="https://api.whatsapp.com/send?phone=573226330880&amp;text=Hola%20vengo%20de%20la%20p%C3%A1gina%20web%20y%20me%20interesaría%20conocer%20m%C3%A1s%20de%20ustedes" target="_blank" rel="noreferrer" alt="Enlace a Whatsapp" name="Enlace a Whatsapp">
               <BsWhatsapp size={20} color="white"/>
           </a>
         </div>

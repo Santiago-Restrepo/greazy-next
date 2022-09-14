@@ -6,7 +6,10 @@ import {FaFacebookF} from 'react-icons/fa'
 
 
 const numberFormat = new Intl.NumberFormat('co-CO', { style: 'currency', currency: 'COP' });
-
+const formatNumber = (number)=>{
+    let formattedNumber = number
+    return formattedNumber
+}
 export const ProductCard = ({product}) => {
     const productHasBackImage = product.backImage ? true: false;
     let discount = null;
@@ -50,13 +53,13 @@ export const ProductCard = ({product}) => {
             <a href="https://www.facebook.com/Greazy-streetwear-101671948261008" target="_blank" rel="noreferrer" alt="Enlace a facebook" name="Enlace a facebook">
                 <FaFacebookF size={30} color="white"/>
             </a>
-            <a href={`https://api.whatsapp.com/send?phone=573226330880&amp;text=Hola%20me%20interesa%20la%prenda%20${product.name},%20%C2%BFpodr%C3%ADas%20darme%20m%C3%A1s%20informaci%C3%B3n?`} target="_blank" rel="noreferrer" alt="Enlace a Whatsapp" name="Enlace a Whatsapp">
+            <a href={`https://api.whatsapp.com/send?phone=573226330880&amp;text=Hola%20me%20interesa%20la%prenda%20${encodeURIComponent(product.name)},%20%C2%BFpodr%C3%ADas%20darme%20m%C3%A1s%20informaci%C3%B3n?`} target="_blank" rel="noreferrer" alt="Enlace a Whatsapp" name="Enlace a Whatsapp">
                 <BsWhatsapp size={30} color="white"/>
             </a>
         </div>
         </div>
             <span className={`productCard__container__name`}>{product.name}</span>
-            <span className={`productCard__container__price`}>{String(numberFormat.format(product.currentPrice)).replace(',00', "")}</span>
+            <span className={`productCard__container__price`}>{formatNumber(product.currentPrice)} COP</span>
         </div>
     </div>
     )

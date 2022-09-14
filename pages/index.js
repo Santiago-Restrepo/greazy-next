@@ -47,7 +47,7 @@ export default function Home() {
         console.log(data);
         // rerender the entire component with new data
         setFeaturedPhoto(data.galleryPhotoCollection.items.filter(item => item.featured)[0])
-        setGalleryPhotos(data.galleryPhotoCollection.items)
+        setGalleryPhotos(data.galleryPhotoCollection.items.filter(item => !item.featured))
         });
   },[])
   
@@ -114,7 +114,7 @@ export default function Home() {
         </div>
       </div>
     </section>
-    <footer className="footer"><span className="rights">® 2021 by Greazy</span></footer>
+    <footer className="footer"><span className="rights">® 2022 by Greazy</span></footer>
     </div>
   )
 }

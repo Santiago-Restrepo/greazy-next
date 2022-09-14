@@ -53,7 +53,7 @@ export const ProductCard = ({product}) => {
             <a href="https://www.facebook.com/Greazy-streetwear-101671948261008" target="_blank" rel="noreferrer" alt="Enlace a facebook" name="Enlace a facebook">
                 <FaFacebookF size={30} color="white"/>
             </a>
-            <a href={`https://api.whatsapp.com/send?phone=573226330880&amp;text=Hola%20me%20interesa%20la%prenda%20${encodeURIComponent(product.name)},%20%C2%BFpodr%C3%ADas%20darme%20m%C3%A1s%20informaci%C3%B3n?`} target="_blank" rel="noreferrer" alt="Enlace a Whatsapp" name="Enlace a Whatsapp">
+            <a href={`https://wa.me/573226330880?text=Hola%20me%20interesa%20la%20prenda%20${encodeURIComponent(product.name)},%20%C2%BFpodr%C3%ADas%20darme%20m%C3%A1s%20informaci%C3%B3n?`} target="_blank" rel="noreferrer" alt="Enlace a Whatsapp" name="Enlace a Whatsapp">
                 <BsWhatsapp size={30} color="white"/>
             </a>
         </div>

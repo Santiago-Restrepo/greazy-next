@@ -49,8 +49,9 @@ export default function Home({galleryPhotos, products}) {
   // const [galleryPhotos, setGalleryPhotos] = useState(null)
   const [featuredPhoto, setFeaturedPhoto] = useState(null)
   useEffect(()=>{
-    console.log(products);
-      setFeaturedPhoto(galleryPhotos.filter(item => item.featured)[0])
+    if (galleryPhotos) {
+      setFeaturedPhoto(galleryPhotos.filter(item => item.featured)[0]) 
+    }
   },[])
   
   return (
@@ -66,7 +67,6 @@ export default function Home({galleryPhotos, products}) {
         </div>
       </header>
       <Hero/>
-
       {
         products &&
         <Catalog products={products}/>
@@ -124,7 +124,7 @@ export default function Home({galleryPhotos, products}) {
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const galleryPhotosResponse = await fetch(`https://graphql.contentful.com/content/v1/spaces/oog003kr6f0q`, {
       method: "POST",
       headers: {
@@ -141,7 +141,7 @@ export async function getServerSideProps() {
       headers: {
           "Content-Type": "application/json",
           // Authenticate the request
-          Authorization: "Bearer VI6PUF7aGdSthBhukcD-t1-XcDCdm0YF-Hgp5Yi1T_U",
+          Authorization: `Bearer ${process.env.api_token}`,
       },
       // send the GraphQL query
       body: JSON.stringify({ query: queryProducts })

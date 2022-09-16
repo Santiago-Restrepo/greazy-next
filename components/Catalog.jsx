@@ -129,7 +129,7 @@ export const Catalog = ({products}) => {
             // breakpoints}
             loop={true}
             spaceBetween={10}
-            slidesPerView={1}
+            slidesPerView="auto"
             navigation
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}

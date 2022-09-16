@@ -11,7 +11,7 @@ import {BsInstagram, BsWhatsapp} from 'react-icons/bs'
 import {FaFacebookF} from 'react-icons/fa'
 
 
-const query = `
+const queryGalleryPhotos = `
   query{
     galleryPhotoCollection(limit: 9){
       items{
@@ -24,31 +24,33 @@ const query = `
     }
   }
 `
-export default function Home() {
-  const [galleryPhotos, setGalleryPhotos] = useState(null)
+
+const queryProducts = `
+query{
+    productCollection(limit: 15){
+        items{
+            name,
+            oldPrice,
+            currentPrice,
+            frontImage{
+                title,
+                url
+            }
+            backImage{
+                title,
+                url
+            },
+            new
+        }
+    }
+}
+`
+export default function Home({galleryPhotos, products}) {
+  // const [galleryPhotos, setGalleryPhotos] = useState(null)
   const [featuredPhoto, setFeaturedPhoto] = useState(null)
   useEffect(()=>{
-    window
-        .fetch(`https://graphql.contentful.com/content/v1/spaces/oog003kr6f0q`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            // Authenticate the request
-            Authorization: "Bearer VI6PUF7aGdSthBhukcD-t1-XcDCdm0YF-Hgp5Yi1T_U",
-        },
-        // send the GraphQL query
-        body: JSON.stringify({ query }),
-        })
-        .then((response) => response.json())
-        .then(({ data, errors }) => {
-        if (errors) {
-            console.error(errors);
-        }
-        console.log(data);
-        // rerender the entire component with new data
-        setFeaturedPhoto(data.galleryPhotoCollection.items.filter(item => item.featured)[0])
-        setGalleryPhotos(data.galleryPhotoCollection.items.filter(item => !item.featured))
-        });
+    console.log(products);
+      setFeaturedPhoto(galleryPhotos.filter(item => item.featured)[0])
   },[])
   
   return (
@@ -65,7 +67,10 @@ export default function Home() {
       </header>
       <Hero/>
 
-      <Catalog/>
+      {
+        products &&
+        <Catalog products={products}/>
+      }
       <section className="about__greazy">
         {
           featuredPhoto ?
@@ -117,4 +122,35 @@ export default function Home() {
     <footer className="footer"><span className="rights">® 2022 by Greazy</span></footer>
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  const galleryPhotosResponse = await fetch(`https://graphql.contentful.com/content/v1/spaces/oog003kr6f0q`, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+          // Authenticate the request
+          Authorization: "Bearer VI6PUF7aGdSthBhukcD-t1-XcDCdm0YF-Hgp5Yi1T_U",
+      },
+      // send the GraphQL query
+      body: JSON.stringify({ query: queryGalleryPhotos })
+  })
+  const galleryPhotos = await galleryPhotosResponse.json();
+  const productsResponse = await fetch(`https://graphql.contentful.com/content/v1/spaces/oog003kr6f0q`, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+          // Authenticate the request
+          Authorization: "Bearer VI6PUF7aGdSthBhukcD-t1-XcDCdm0YF-Hgp5Yi1T_U",
+      },
+      // send the GraphQL query
+      body: JSON.stringify({ query: queryProducts })
+  })
+  const products = await productsResponse.json();
+  return {
+      props:{
+          galleryPhotos: galleryPhotos.data.galleryPhotoCollection.items,
+          products: products.data.productCollection.items
+      }
+  }
 }

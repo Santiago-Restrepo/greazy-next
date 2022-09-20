@@ -72,7 +72,7 @@ import Image from 'next/image';
 
 const query = `
 query{
-    productCollection(limit: 10){
+    productCollection(limit: 15){
         items{
             name,
             oldPrice,
@@ -91,37 +91,32 @@ query{
 }
 `
 
-export const Catalog = () => {
-    const [products, setProducts] = useState(null);
-    // useEffect(()=>{
-    //     setTimeout(()=>{
-    //         setProducts(productsFetched)
-    //     },1000)
-    // }, [])
-
-    useEffect(() => {
-        window
-        .fetch(`https://graphql.contentful.com/content/v1/spaces/oog003kr6f0q`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            // Authenticate the request
-            Authorization: "Bearer VI6PUF7aGdSthBhukcD-t1-XcDCdm0YF-Hgp5Yi1T_U",
-        },
-        // send the GraphQL query
-        body: JSON.stringify({ query }),
-        })
-        .then((response) => response.json())
-        .then(({ data, errors }) => {
-        if (errors) {
-            console.error(errors);
-        }
-        console.log(data);
-        // rerender the entire component with new data
-        setProducts(data.productCollection.items)
-        // setPage(data.pageCollection.items[0]);
-        });
-    }, []);
+export const Catalog = ({products}) => {
+    // const [products, setProducts] = useState(null);
+    // console.log(data);
+    // useEffect(() => {
+    //     window
+    //     .fetch(`https://graphql.contentful.com/content/v1/spaces/oog003kr6f0q`, {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //         // Authenticate the request
+    //         Authorization: "Bearer VI6PUF7aGdSthBhukcD-t1-XcDCdm0YF-Hgp5Yi1T_U",
+    //     },
+    //     // send the GraphQL query
+    //     body: JSON.stringify({ query }),
+    //     })
+    //     .then((response) => response.json())
+    //     .then(({ data, errors }) => {
+    //     if (errors) {
+    //         console.error(errors);
+    //     }
+    //     console.log(data);
+    //     // rerender the entire component with new data
+    //     setProducts(data.productCollection.items)
+    //     // setPage(data.pageCollection.items[0]);
+    //     });
+    // }, []);
 
   return (
     <section className="catalog">
@@ -134,7 +129,7 @@ export const Catalog = () => {
             // breakpoints}
             loop={true}
             spaceBetween={10}
-            slidesPerView={1}
+            slidesPerView="auto"
             navigation
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}

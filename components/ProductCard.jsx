@@ -5,7 +5,7 @@ import {BsInstagram, BsWhatsapp} from 'react-icons/bs'
 import {FaFacebookF} from 'react-icons/fa'
 
 
-const numberFormat = new Intl.NumberFormat('co-CO', { style: 'currency', currency: 'COP' });
+const numberFormat = new Intl.NumberFormat('co-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0});
 const formatNumber = (number)=>{
     let formattedNumber = number
     return formattedNumber
@@ -59,7 +59,7 @@ export const ProductCard = ({product}) => {
             </div>
             </div>
                 <span className={`productCard__container__name`}>{product.name}</span>
-                <span className={`productCard__container__price`}>{product.currentPrice} COP</span>
+                <span className={`productCard__container__price`}>{numberFormat.format(product.currentPrice)}</span>
             </div>
     </div>
     )

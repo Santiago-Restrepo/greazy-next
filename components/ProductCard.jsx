@@ -39,7 +39,7 @@ export const ProductCard = ({product}) => {
                 }
                 {
                     discount &&
-                    <span className="discount">{discount}%</span>
+                    <span className="discount">{discount}% </span>
 
                 }
                 {

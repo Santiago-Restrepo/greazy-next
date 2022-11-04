@@ -1,6 +1,6 @@
 # Greazy landing page
 
-Landing page for streetwear clothing brand Greazy
+Next js application for streetwear clothing brand Greazy
 
 ### Installation 🔧
 
@@ -13,14 +13,11 @@ Landing page for streetwear clothing brand Greazy
 
 ## Built with 🛠️
 
-* <img src="https://shields.io/badge/Pug-brown?logo=nextjs&logoColor=white&style=for-the-badge"> - Page structure
-* <img src="https://shields.io/badge/sass-white?logo=sass&style=for-the-badge"> - App styles
-* <img src="https://shields.io/badge/javascript-black?logo=javascript&style=for-the-badge"> - Programming language in charge of the dynamic part of the page.
-* <img src="https://shields.io/badge/webpack-gray?logo=webpack&style=for-the-badge"> - Module bundler used
+* <img src="https://shields.io/badge/nextjs-black?logo=nextJS&logoColor=white&style=for-the-badge"> - Framework used for app creation
 
 ## Version 📌
 
-##### Version 1.0.0
+##### Version 2.0.0
 
 ## Contributors ✒️
 

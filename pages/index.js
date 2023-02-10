@@ -149,8 +149,9 @@ export async function getStaticProps() {
   const products = await productsResponse.json();
   return {
       props:{
-          galleryPhotos: galleryPhotos.data.galleryPhotoCollection.items,
-          products: products.data.productCollection.items
-      }
+        galleryPhotos: galleryPhotos.data.galleryPhotoCollection.items,
+        products: products.data.productCollection.items
+      },
+      revalidate: 60
   }
 }

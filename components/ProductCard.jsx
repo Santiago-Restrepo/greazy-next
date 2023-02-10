@@ -21,13 +21,27 @@ export const ProductCard = ({product}) => {
             <div className={`productCard__container`}>
             <div className={`productCard__container__image`}>
                 <div className="primary__image">
-                    <Image layout='fill' sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"  objectFit={'cover'} loading="lazy" src={product.frontImage.url} alt={`${product.frontImage.title}`} name={`${product.frontImage.title}`}/>
+                    <Image 
+                        layout='fill' 
+                        sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"  
+                        objectFit={'cover'} src={product.frontImage.url} 
+                        alt={`${product.frontImage.title}`} 
+                        name={`${product.frontImage.title}`}
+                        priority={true}
+                    />
                 </div>
                 {
                     productHasBackImage &&
                     <>
                         <div className="secondary__image">
-                            <Image layout='fill'  objectFit={'cover'} loading="lazy" src={product.backImage.url} alt={`${product.backImage.title}`} name={`${product.backImage.title}`}/>
+                            <Image 
+                                layout='fill'  
+                                objectFit={'cover'} 
+                                priority={true}
+                                src={product.backImage.url} 
+                                alt={`${product.backImage.title}`} 
+                                name={`${product.backImage.title}`}
+                            />
                         </div>
                         <button className="viewMore" onClick={(e)=>{
                             if (e.target.closest('.productCard__container__image')) {
